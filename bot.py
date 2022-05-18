@@ -392,7 +392,7 @@ async def tictactoe_error(ctx, error):
         await ctx.send("Por favor asegúrate de mencionar / hacer ping a los jugadores (ie. <@688534433879556134>).")
 
 
-@client.command(aliases=["ltc"]) # You can add more aliases here
+@client.command(aliases=["ltc"]) 
 async def latency(ctx):
 	if int(round(client.latency * 1000)) <= 50:
 		color=0x000000
@@ -425,11 +425,11 @@ async def on_message_delete(message):
 @client.command(name = 'snipe')
 async def snipe(ctx):
     channel = ctx.channel
-    try: #This piece of code is run if the bot finds anything in the dictionary
+    try: 
         em = discord.Embed(name = f"Last deleted message in #{channel.name}", description = snipe_message_content[channel.id])
         em.set_footer(text = f"This message was sent by {snipe_message_author[channel.id]}")
         await ctx.send(embed = em)
-    except KeyError: #This piece of code is run if the bot doesn't find anything in the dictionary
+    except KeyError: 
         await ctx.send(f"There are no recently deleted messages in #{channel.name}")
         
 #------------------------------------------------
@@ -850,7 +850,7 @@ async def leaderboard(ctx,x = 1):
 
     total = sorted(total,reverse=True)    
 
-    em = discord.Embed(title = f"Top {x} Richest People" , description = "This is decided on the basis of raw money in the bank and wallet",color = discord.Color(0xfa43ee))
+    em = discord.Embed(title = f"Top {x} gente mas rica" , description = "Testo se decide sobre la base del dinero bruto en el banco y la billetera",color = discord.Color(0xfa43ee))
     index = 1
     for amt in total:
         id_ = leader_board[amt]
@@ -900,18 +900,17 @@ async def update_bank(user,change=0,mode = 'wallet'):
     return bal
     
 @client.command(pass_context=True)
-@commands.has_permissions(administrator=True) #ensure that only administrators can use this command
-async def changeprefix(ctx, prefix): #command: bl!changeprefix ...
+@commands.has_permissions(administrator=True)
+async def changeprefix(ctx, prefix):
     with open('prefixes.json', 'r') as f:
         prefixes = json.load(f)
 
     prefixes[str(ctx.guild.id)] = prefix
 
-    with open('prefixes.json', 'w') as f: #writes the new prefix into the .json
+    with open('prefixes.json', 'w') as f:
         json.dump(prefixes, f, indent=4)
 
-    await ctx.send(f'Prefix changed to: {prefix}') #confirms the prefix it's been changed to
-#next step completely optional: changes bot nickname to also have prefix in the nickname
+    await ctx.send(f'Prefix changed to: {prefix}')
     name=f'{prefix}BotBot'
  
 @client.event
@@ -1151,9 +1150,8 @@ async def on_raw_reaction_remove(payload):
         data = json.load(react_file)
         for x in data:
 
-            if x['message_id'] == payload.message_id:  # checks if the found member id is equal to the id from the
-                                                        # message where a reaction was added
-                if x['emoji'] == payload.emoji.name:  # checks if the found emoji is equal to the reacted emoji
+            if x['message_id'] == payload.message_id:
+                if x['emoji'] == payload.emoji.name:
                     role = discord.utils.get(client.get_guild(
                         payload.guild_id).roles, id=x['role_id'])
 
