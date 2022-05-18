@@ -253,10 +253,10 @@ async def encrypt(ctx):
 async def decrypt(ctx):
     user = ctx.author
     await user.send("Porfavor, introduce el mensaje encriptado.")
-    response = await client.wait_for('message') # , check=message_check(channel=ctx.author.dm_channel))
+    response = await client.wait_for('message')
     encrypted = response.content.encode()
     await user.send("Introduce la key:")
-    response = await client.wait_for('message') # , check=message_check(channel=ctx.author.dm_channel))
+    response = await client.wait_for('message') 
     key = response.content.encode()
     f = Fernet(key)
     decrypted = f.decrypt(encrypted)
