@@ -24,12 +24,12 @@ import asyncio
 import numpy as np
 import cv2 as cv
 from io import BytesIO
-import PIL
-from PIL import Image
 import time
 from itertools import cycle
 import xml.etree.ElementTree as et
 import rule34
+
+BOT_TOKEN = ""
 
 ltime = time.asctime(time.localtime())
 r = rule34.Rule34
@@ -1092,7 +1092,6 @@ async def pato(ctx):
 @client.command()
 async def porn(ctx,*arg):
 	answer = ''
-	# this is inefficent but also the only way i can do this
 	arg = str(arg)
 	arg = arg.replace(',','')
 	arg = arg.replace('(','')
@@ -1136,9 +1135,9 @@ async def on_raw_reaction_add(payload):
         with open('reactrole.json') as react_file:
             data = json.load(react_file)
             for x in data:
-                if x['message_id'] == payload.message_id:  # checks if the found member id is equal to the id from the
-                                                           # message where a reaction was added
-                    if x['emoji'] == payload.emoji.name:  # checks if the found emoji is equal to the reacted emoji
+                if x['message_id'] == payload.message_id:
+                                                          
+                    if x['emoji'] == payload.emoji.name:
                         role = discord.utils.get(client.get_guild(
                             payload.guild_id).roles, id=x['role_id'])
 
@@ -1186,7 +1185,7 @@ async def reactrole(ctx, emoji, role: discord.Role, *, message):
 async def menu(ctx):
     page1 = discord.Embed (
         title = 'Diversion 1/3',
-        description = f'**vtc** | Realiza una votacion con este comando \n**avatar** | etiqueta a un usuario para ver su avatar \n **google** | Busca algo por google \n **lmgtfy** | Busca una sarcastica respuesta\n **emojify** | Transforma de texto a emojis \n **pato** | Haz aparecer un pato \n **minecraft** | Busca informacion sobre la cuenta de alguien premiun \n **porn** | Selecciona una categoria con este comando y te dare un resultado | \n **snipe** | Ve si algun mensaje fue borrado \n **whois** | Obten inforamcion de un usuario etiquetandolo \n **tictactoe** | Etiquetate a vos y a la persona con la que quieras jugar \n **place** | con este comando selecciona un emoji, de 1 a 9 para marcarlo y espera tu turno. \n  afk | Pon un estado de afk',
+        description = f'**vtc** | Realiza una votacion con este comando \n**avatar** | etiqueta a un usuario para ver su avatar \n **google** | Busca algo por google \n **lmgtfy** | Busca una sarcastica respuesta\n **emojify** | Transforma de texto a emojis \n **pato** | Haz aparecer un pato \n **minecraft** | Busca informacion sobre la cuenta de alguien premiun \n **porn** | Selecciona una categoria con este comando y te dare un resultado | \n **snipe** | Ve si algun mensaje fue borrado \n **whois** | Obten inforamcion de un usuario etiquetandolo \n **tictactoe** | Etiquetate a vos y a la persona con la que quieras jugar \n **place** | con este comando selecciona un emoji, de 1 a 9 para marcarlo y espera tu turno. \n  afk | Pon un estado de afk \n **punch** | Golpea a alguien con este comando etiquetadolo \n **shot** | Golpea a la persona que etiquetaste con esto \n **kiss** | Besa a quien hayas etiquetado ',
         colour = discord.Colour.red()
     )
     page2 = discord.Embed (
@@ -1255,4 +1254,72 @@ async def afk(ctx, mins):
             await ctx.send(f"{ctx.author.mention} no esta afk")
             break    
 
-client.run("OTc2MDEwOTQxMzg2ODU0NDQw.G-NIEx.Z01ArMZe1OUwf0mwMNtADH2yHRg-KHXqEJ1QFE")
+@client.command()
+async def ship(ctx, user_1 : discord.Member, user_2 : discord.Member):
+    await ctx.send(f"{user_1.mention} y {user_2.mention} hacen linda pareja ")
+
+
+punch_gifs =['https://i.pinimg.com/originals/2b/5d/7b/2b5d7bb1dd4a8e64869c33499c409582.gif',
+ 'https://i.pinimg.com/originals/24/53/85/2453852df2d5f4644f8c7d9a8c1d1ff6.gif',
+ 'https://i.pinimg.com/originals/01/7a/21/017a21aedc18c37b96995acfbe5ebcda.gif',
+ ]
+
+punch_names = ['Te golpeo',
+ 'Golpeo a',
+ 'Le dio una paliza a',
+ 'Cago a piñas a',
+ ]
+
+@client.command()
+async def punch(ctx, member : discord.Member):
+    embed = discord.Embed(
+          color=(discord.Colour.random()), 
+          description = f"{ctx.author.mention} {(random.choice(punch_names))} {member})"
+          
+    )
+    embed.set_image(url=(random.choice(punch_gifs)))
+    
+    await ctx.send(embed=embed)
+
+shot_gifs =['Te golpeo',
+'https://i.pinimg.com/originals/0d/ff/63/0dff63ddb1c91f4657a07372bf761e5d.gif',
+'https://i.pinimg.com/originals/85/01/18/8501189152473f6bd7a6767d84159bd1.gif',
+'https://i.pinimg.com/originals/6c/1c/bd/6c1cbd064bed81b88a1739e23f9b65d8.gif',
+'https://i.pinimg.com/originals/a0/07/8b/a0078b401e72994d052af23c7f795f6b.gif',
+]
+shot_names =['Cago a tiros a',
+'Disparo a',
+'Le a disparado a',
+]
+
+@client.command()
+async def shot(ctx, member : discord.Member):
+    embed = discord.Embed(
+          color=(discord.Colour.random()), 
+          description = f"{ctx.author.mention} {(random.choice(shot_names))} {member})"
+          
+    )
+    embed.set_image(url=(random.choice(shot_gifs)))
+    
+    await ctx.send(embed=embed)
+
+kiss_gifs =['https://i.pinimg.com/originals/b2/0f/e0/b20fe027ba2f488d72d890ddc2b927ab.gif',
+'https://i.pinimg.com/originals/07/5e/9d/075e9d0a559e7d85f5bb0da7ccad7d11.gif',
+'https://i.pinimg.com/originals/2d/e7/6f/2de76fef28cf0eb8c2ea48bd36efba1d.gif',
+]
+kiss_names =['le dio un beso a',
+'beso a',
+]
+
+@client.command()
+async def kiss(ctx, member : discord.Member):
+    embed = discord.Embed(
+          color=(discord.Colour.random()), 
+          description = f"{ctx.author.mention} {(random.choice(kiss_names))} {member})"
+          
+    )
+    embed.set_image(url=(random.choice(kiss_gifs)))
+    
+    await ctx.send(embed=embed)  
+	
+client.run(BOT_TOKEN)
