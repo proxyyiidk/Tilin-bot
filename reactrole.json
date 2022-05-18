@@ -1,0 +1,32 @@
+[
+    {
+        "role_name": "! lider de partido nacionalista",
+        "role_id": 972693385125179392,
+        "emoji": "\ud83d\udc3f\ufe0f",
+        "message_id": 972743693515759646
+    },
+    {
+        "role_name": "! nazi",
+        "role_id": 972693529241460737,
+        "emoji": "\ud83d\udc3f\ufe0f",
+        "message_id": 972744550999289876
+    },
+    {
+        "role_name": "! comunista",
+        "role_id": 972712657406795826,
+        "emoji": "\ud83d\udc80",
+        "message_id": 972918303708282992
+    },
+    {
+        "role_name": "\ud83e\udddf z0mb \ud83e\udddf",
+        "role_id": 975997055262658591,
+        "emoji": "\ud83d\udc3f\ufe0f",
+        "message_id": 976017938777796618
+    },
+    {
+        "role_name": "\ud83e\ude78 v4mp \ud83e\ude78",
+        "role_id": 975971340483956746,
+        "emoji": "\u270c\ufe0f",
+        "message_id": 976035466367352902
+    }
+]
